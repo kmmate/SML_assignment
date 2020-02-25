@@ -1,0 +1,450 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{t1enc}      
+\usepackage[T1]{fontenc}          
+\usepackage[utf8]{inputenc} 
+%\usepackage[magyar]{babel}                                  
+
+%%%%%%%%%%%%%%%%%%%%%		Tables    %%%%%%%%%%%%%%%%%%%%%%%%%%%%\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tabularx}     
+\usepackage{latexsym} 
+\usepackage{longtable}
+\usepackage{booktabs}  % tables
+\usepackage{array}  % array and tabular environment
+\usepackage{float}   % figures and tables
+\usepackage{multirow}  % tables
+\usepackage{makecell}  % tabular column heads
+\newcommand{\specialcell}[2][c]{
+\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\usepackage[flushleft]{threeparttable}
+\usepackage{dcolumn}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{\cdot}{#1}}
+%\titlespacing{\chapter}{0pt}{50pt}{20pt}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode} 
+
+
+%%%%%%%%%%%%%%%%%%%%%		Figures, symbols    %%%%%%%%%%%%%%%%%%%%%%%%%%%%\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{psfrag}
+\usepackage{epstopdf}
+\usepackage{graphics}     
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{textcomp}  % text smbols like bullets, copyright etc
+\usepackage{pdfpages}  % including pdfs
+\usepackage{tikz,fullpage}
+\usetikzlibrary{arrows,petri,topaths,backgrounds,snakes,patterns,positioning}
+\usepackage{tkz-berge}
+\usetikzlibrary{pgfplots.groupplots}
+% Color definition
+\definecolor{grey}{rgb}{0.9,0.9,0.9} 
+
+
+%%%%%%%%%%%%%%%%%%%%%		Formatting    %%%%%%%%%%%%%%%%%%%%%%%%%%%%\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fix-cm}   
+%\usepackage[a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}   
+\usepackage{fullpage}  % adjust margins
+\usepackage[titles]{tocloft}  % table of contents, figures
+\usepackage[nottoc]{tocbibind}
+\usepackage[raggedright]{titlesec}  % section titles
+\usepackage{rotfloat}  % rotate floats
+\usepackage[justification=centering]{caption}  % captions for floats
+\usepackage{enumitem}
+\frenchspacing                           
+\linespread{1.3}
+\usepackage{relsize}	   
+\usepackage{anysize}
+\marginsize{2cm}{2cm}{2cm}{2cm}    
+\linespread{1.3}
+%\setlength{\oddsidemargin}{10mm} 
+%\setlength{\evensidemargin}{5mm}
+
+%Setting pagestyles: with pagenumbers but without headers
+\usepackage{fancyhdr} 
+\fancypagestyle{myplain}
+{
+  \fancyhf{}
+  \renewcommand\headrulewidth{0pt}
+  \renewcommand\footrulewidth{0pt}
+  \fancyfoot[C]{\thepage}
+}
+  % Set section etc. style
+\titleformat{\section}
+  {\normalfont\normalsize\bfseries}{\thesection.}{1em}{}
+  \titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}{\thesubsection.}{1em}{} 
+ 
+ % Set section spacing
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt} 
+
+\widowpenalty=10000 
+\clubpenalty=10000
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+
+%%%%%%%%%%%%%%%%%%%%%		References    %%%%%%%%%%%%%%%%%%%%%%%%%%%%\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[plainpages=false,breaklinks=true]{hyperref}
+%\usepackage[plainpages=false,breaklinks=true, citecolor=blue, colorlinks=true, linkcolor=black, urlcolor=black]{hyperref} 
+\usepackage{breakcites}
+\usepackage[round]{natbib}
+%\usepackage[square,comma,numbers]{natbib}
+%Biblioghraphy rename
+\renewcommand{\bibname}{References}
+%\setcitestyle{numbers}%, open={[}, close={]}}
+%\setcitestyle{square}
+
+
+%%%%%%%%%%%%%%%%%%%%%		Math  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}     
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{rotating}     
+\usepackage{amsthm}
+\usepackage{etoolbox}
+% Renew command: sqare bracket matrix (% requires etoolbox)
+\let\bbordermatrix\bordermatrix
+\patchcmd{\bbordermatrix}{8.75}{4.75}{}{}
+\patchcmd{\bbordermatrix}{\left(}{\left[}{}{}
+\patchcmd{\bbordermatrix}{\right)}{\right]}{}{}
+% New command: stat operators    
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareMathAlphabet\mathcalbf{OMS}{cmsy}{b}{n}
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\Var}{\mathbf{Var}}
+\DeclareMathOperator*{\cov}{\mathbf{cov}}
+\DeclareMathOperator*{\corr}{\mathbf{corr}}
+\DeclareMathOperator*{\Bias}{\text{Bias}}
+\DeclareMathOperator*{\plim}{\text{plim}}
+%New command: squared bracket
+\newcommand{\sqrbt}[1]{\left[#1\right]}
+%New command definite integral
+\newcommand{\dint}[2]{\int\limits_{#1}^{#2}}
+%New command: sum with limits
+\newcommand{\sumlim}[2]{\sum\limits_{#1}^{#2}}
+%New command: product with limits
+\newcommand{\prodlim}[2]{\prod\limits_{#1}^{#2}}
+%New command: definite integral newton-bracket. limits= #2 and #3, expression: #1
+\newcommand{\defb}[3]{\left[#1\right]_{#2}^{#3}}
+%New command: squared bracket Exp value
+\newcommand{\Eb}[1]{\E\left[#1\right]}
+%New command: squared bracket Exp value with subindex
+\newcommand{\Ebs}[2]{{\E}_{#1}\left[#2\right]}
+%New command: squared bracket Var
+\newcommand{\Varb}[1]{\Var\left[#1\right]}
+%New command: underset shortcut
+\newcommand{\us}[2]{\underset{#1}{#2}}
+%New command: overset shortcut
+\newcommand{\os}[2]{\overset{#1}{#2}}
+%New command: dlimit (`definite limit' from #1 to #2)
+\newcommand{\dlim}[2]{\underset{#1\rightarrow#2}{\lim}}
+%New command: dplimit  (`definite plimit' from #1 to #2)
+\newcommand{\dplim}[2]{\underset{#1\rightarrow#2}{\plim}}
+%New command: nicer plusminus
+\makeatletter
+\newcommand{\mypm}{\mathbin{\mathpalette\@mypm\relax}}
+\newcommand{\@mypm}[2]{\ooalign{%
+  \raisebox{.1\height}{$#1+$}\cr
+  \smash{\raisebox{-.6\height}{$#1-$}}\cr}}
+\makeatother
+%New command: nicer minusplus
+\makeatletter
+\newcommand{\mymp}{\mathbin{\mathpalette\@mymp\relax}}
+\newcommand{\@mymp}[2]{\ooalign{%
+  \raisebox{.5\height}{$#1-$}\cr
+  \smash{\raisebox{-.2\height}{$#1+$}}\cr}}
+\makeatother
+%New command: tilde shortcut
+\newcommand{\tld}[1]{\tilde{#1}}
+%New command: fraction shortcut
+\newcommand{\fr}[2]{\frac{#1}{#2}}
+%New command hat shortcut
+\newcommand{\h}[1]{\hat{#1}}
+%New command bar shortcut
+\newcommand{\ba}[1]{\bar{#1}}
+%New command: bold vector
+\newcommand{\bv}[1]{\mathbf{#1}}
+%New command: norm
+\newcommand{\norm}[2]{\left\lVert{#2}\right\rVert_{#1}}
+%New command independence
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+\renewcommand{\indep}{\!\perp\!\!\!\perp}
+\newcommand{\notindep}{\not\!\perp\!\!\!\perp}
+%New command: trace
+\newcommand{\tr}[1]{\text{tr}\left(#1\right)}
+%New command: process
+\newcommand{\pro}[1]{\{#1\}}
+%New command: linear projection
+\newcommand{\linproj}[1]{\widehat{\mathbb{E}}\left[#1 \right]}
+% New command: not implies
+\newcommand{\notimplies}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+% New command: converge in distribution
+\newcommand{\condist}{\overset{d}{\longrightarrow}}
+% New command: nicer ":="
+\newcommand{\ceq}{\coloneqq}  % requires \usepackege{mathtools}
+
+
+%%%%%%%%%%%%%%%%%%%%%		Algorithms    %%%%%%%%%%%%%%%%%%%%%%%%%%%%\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{algorithm}
+\usepackage{listings}
+\usepackage[noend]{algpseudocode}
+\usepackage{xparse}
+
+
+%%% Alg. comments
+\renewcommand{\algorithmicrequire}{\textbf{input:}}
+\renewcommand{\algorithmicensure}{\textbf{output:}}
+\newcommand{\Input}{\algorithmicrequire}
+\newcommand{\Output}{\algorithmicensure}
+% with 1 level-ident
+\NewDocumentCommand{\TopLeftComment}{s m}{%
+  \Statex \IfBooleanF{#1}{\hspace*{\algorithmicindent}}\(\triangleright\) #2}
+% with 2 level-ident
+  \NewDocumentCommand{\TopLeftLComment}{s m}{%
+  \Statex \IfBooleanF{#1}{\hspace*{\algorithmicindent}\hspace*{\algorithmicindent}}\(\triangleright\) #2} 
+% with 3 level-ident
+  \NewDocumentCommand{\TopLeftLLComment}{s m}{%
+  \Statex \IfBooleanF{#1}{\hspace*{\algorithmicindent}\hspace*{\algorithmicindent}\hspace*{\algorithmicindent}}\(\triangleright\) #2} 
+\NewDocumentCommand{\LeftComment}{s m}{%
+  \Statex \IfBooleanF{#1}{\hspace*{\ALG@thistlm}}\(\triangleright\) #2}
+  \makeatother
+
+
+
+\usepackage[position=top]{subfig}  % !!!!!!!!!!!! CANNOT BE MOVED ABOVE
+
+
+ 
+
+
+%%%% --------------------------------------------------------------------------------------------------------------------------
+
+
+% File specific commands
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\posreal}{\mathbb{R}_+}
+\newcommand{\posint}{\mathbb{Z}_+}
+\newcommand{\dummy}{\{0,1\}}
+\newcommand{\supp}{\text{supp}}
+
+
+ %Header: 
+\lhead{\textsc{M\'at\'e Kormos}}
+\chead{\textsc{SML}}
+\rhead{\textsc{Final Assignment}}
+\setlength{\headheight}{20pt}
+\setlength{\headsep}{20pt}  
+ 
+
+%Figure blank:
+%\begin{figure}[h!]
+%\begin{center}
+%\caption{}\label{}
+%\includegraphics[trim=0 100 0 220,clip,scale=0.7]{Stat_ps3_Q5_pl2.pdf}
+%\end{center}
+%\end{figure}
+
+\AtBeginDocument{\let\textlabel\label}\begin{document}
+\pagestyle{fancy}
+\thispagestyle{myplain}
+\begin{center}
+{\large
+\textbf{\textsc{Estimating the Effect of Maternal Smoking on Newborn Baby's Birth Weight}} \\
+\vspace{0.2cm}
+\textbf{\textsc{Máté Kormos}} }\\
+\vspace{0.5cm}
+\textbf{\textsc{Supervised Machine Learning}} \\
+\textbf{\textsc{Final Assignment, 1 March 2020}}
+
+\end{center}
+\vspace{1cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%			INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+
+\noindent WHO strongly recommends that pregnant women do not smoke \citep{whopregnancy} as tobacco smoking is known to have adverse health effects. In addition to direct effects on the smoking mother, such as increased risk of coronary heart disease or lung cancer,  smoking leads to low birth weight of the newborn baby \citep{whosmoking}. In this report, I quantify this effect by answering the following research question. \textit{How large is, on average, the effect of maternal smoking on the newborn baby's birth weight?}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%			DATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data}
+
+\noindent Hypothetically, the golden standard of answering the research question is based on experimental data, randomising mothers to smoking and non-smoking conditions. Needless to say, such an experiment is unethical and illegal. Therefore, I rely on observational data collected by the North Carolina State Center Health Services (NCSCHS) on first-time Caucasian mothers. I use a randomly chosen subset, including $n=60,000$ observations, of the data set in \cite{abrevaya2015}, which was generously provided by Robert P. Lieli.
+
+\noindent The data set contains information on the newborn baby's weight and whether the mother smokes or not. Covariates indicating the socioeconomic and health status of the mother, and neighbourhood-level economic measures are also recorded. The variables are described in Table \ref{tab:data_des} (source: \cite{fan2019}), and summary statistics, grouped by mother's smoking, are presented in Table \ref{tab:sum_stat}.
+
+\noindent Table \ref{tab:sum_stat} suggests that the birth weight of smoking mothers' babies tends to fall short that of the nonsmoker mothers', by 240 grams on average. To formally test independence between mother's smoking and baby's birth weight, I perform a permutation test with $H_0: \text{\textit{bweight}}\indep\text{\textit{smoke}}$ against $H_1: \text{\textit{bweight}}\notindep\text{\textit{smoke}}$.  The test statistics used is the Pearson correlation coefficient  between \textit{bweight} and \textit{smoke}, with 2000  random permutations to simulate its distribution under $H_0$.
+The test results in a \input{ptest_results.tex},
+hence we can reject independence at every conventional size. 
+
+\noindent However, the composition of smoker and nonsmoker mothers differs -- a clear sign of the lack of randomisation and thus potential confounding. Smoking mothers appear to be younger, less well-educated, non-married, they have more previously terminated pregnancies, and come from poorer, rural/small town neighbourhoods (as it could be inferred from \textit{popdens}). Therefore, in answering the research question, I will use methods which adjust for confounding as much as possible given this data set.
+
+
+\begin{table}[h!]
+\centering
+\caption{Description of Variables in the NCSCHS Data Set}
+\label{tab:data_des}
+\begin{tabular}{lll}
+Name & Support & Description \\ \hline\hline
+bweight &  $\posreal$& birthweight of newborn baby \\
+smoke & $\dummy$ &does the mother smoke? \\ \hline
+mage & $\posint$ & mother's age in years \\
+meduc & $\posint$ & mother's education in years \\
+married &$\dummy$&is the mother married? \\
+terms & $\dummy$ & does mother have previous terminated pregnancies? \\
+fagemiss & $\dummy$ & is father's age missing? \\
+feducmiss &$\dummy$& is father's education missing? \\
+anemia & $\dummy$& did mother suffer from anemia? \\
+hyperpr &$\dummy$& did mother suffer from hyperextension? \\
+medinc &$\posint$& median income in mother's zip code in \$ \\
+pcinc &$\posint$& per capita income in mother's zip code  in \$ \\
+long & $\posint$& longitude of mother's zip code \\
+lat &$\posint$& latitude of mother's zip code \\
+popdens &$\posreal$& population density in mother's  zip code (units/km$^2$)\\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Summary Statistics by Mother's Smoking}
+\label{tab:sum_stat}
+\input{summary_table.tex}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%			METHOD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Method}
+
+\subsection{Identification}
+
+
+\noindent To estimate the \textit{causal} effect of mother's smoking on the baby's birth weight, I rely on the Rubin Causal Model \citep{rubin1974}, the standard framework for causal inference. The estimand of interest is the average treatment effect ($ATE$), defined as
+\begin{align*}
+\theta \ceq \Eb{Y(1)-Y(0)}
+\end{align*} 
+where the counterfactual outcomes $Y(0), Y(1)$ describe the baby's weight in two scenarios: $Y(1)\in\posreal$ is the baby's birth weight if his/her mother smokes, and $Y(0)\in\posreal$ is the baby's weight when the mother does not smoke. Clearly, only one scenario is observable.
+Let $D\in\dummy$ denote the treatment: $D=1$ if and only if the mother actually smokes. Then the observable birth weight is $Y=Y(0)+(Y(1)-Y(0))D$.
+
+Identification of $ATE$ from observational data requires the conditional independence assumption (CIA; also called unconfoundedness) to hold. Under CIA, if we condition on a set of observable pre-treatment covariates ($\bm{x}\in\real^p$), the treatment ($D$) is as good as random, that is $(Y(1), Y0))\indep D \mid \bm{x}$. In our example, CIA means that if a smoker and nonsmoker mother have the same covariates, then there is nothing systematically different between them that affects the birth weight. CIA implicitly introduces the second required identifying assumption, the overlap (OL), which asserts that the treated group can be compared to the control group based on $\bm{x}$. OL states that $\supp(\bm{x}\mid D=1)=\supp(\bm{x}\mid D=0)$, i.e. the covariates have the same support in both groups. As opposed to CIA, this is a testable assumption but I present no tests in this report.
+
+I take all the variables in Table \ref{tab:data_des} (except \textit{bweight} and \textit{smoke}) as covariates, and, in addition, include their powers and interactions up to third degree, leading to $p=403$ covariates.
+
+\noindent CIA and OL provides the identification strategy:
+\begin{align*}
+\theta &= \Eb{Y(1)-Y(0)} \\
+	&= \Eb{\Eb{Y(1)\mid \bm{x}}-\Eb{Y(0)\mid \bm{x}}}  \\
+	&=\Eb{\Eb{Y(1)\mid \bm{x}, D}-\Eb{Y(0)\mid \bm{x}, D}}  \\
+	&=\Eb{\Eb{Y\mid \bm{x}, D=1}-\Eb{Y\mid \bm{x}, D=0}}.
+\end{align*}
+Let $g(D, \bm{x})\ceq\Eb{Y\mid \bm{x}, D}$, so that $\theta=\Eb{g(1, \bm{x})-g( 0, \bm{x})}$. Let $m(\bm{x})\ceq \Eb{D\mid\bm{x}}$ denote the propensity score.
+
+\subsection{Estimation}
+
+I estimate the $ATE$ based on the procedure in \cite{chernozhukov2016} (see Algorithm \ref{alg:estim}). Specifically, the nuisance parameters $\eta\ceq (m, g)$ are estimated with machine learning (ML) methods. The advantage of ML methods is that they are capable of learning complex relationships from the data. However, they are, in general, asymptotically biased because of the regularisation.  \cite{chernozhukov2016} addresses this issue by proposing the use of Neyman orthogonality scores and cross-fitting to ensure asymptotically unbiased $ATE$ estimators for a large class of ML methods including ridge, lasso, regression and classification trees.
+
+\begin{algorithm}[H]
+\caption{\textbf{DML1 Estimation Strategy (\cite{chernozhukov2016}, p. 23, 35)}}\label{alg:estim}
+{\small
+\begin{algorithmic}[1]
+\Require {$i.i.d.$ sample $\bm{w}_i=(Y_i, D_i, \bm{x}_i')'$ for $i=1,2,\ldots N$}
+\Ensure {estimated $ATE$}
+
+\State $(I_k)_{k=1}^K\gets$ random partition of $\{1,2,\ldots,N\}$ s.t. $n\ceq |I_k|=N/K$ $\forall k\in\{1,2,\ldots,K\}$
+
+\State  $(I_k^c)_{k=1}^K\gets\{1,2,\ldots,N\}\setminus I_k$ $\forall k\in\{1,2,\ldots,K\}$
+
+\State $\psi(\bm{w}; \theta, \eta)\gets g(1, \bm{x})-g(0, \bm{x})+\frac{D(Y-g(1,\bm{x}))}{m(\bm{x})}+\frac{(1-D)(Y-g(0,\bm{x}))}{1-m(\bm{x})}$ \Comment{Neyman orthogonal score for $ATE$}
+
+
+\For {$k\in\{1,2,\ldots,K\}$} 
+	\State $\hat{\eta}_k = (\hat{m}_k, \hat{g}_k) \gets \hat{\eta}((\bm{w}_i)_{i\in I_k^c})$ \Comment {cross-fitting ML estimators}
+	
+	\State $\psi_k(\bm{w})\gets \hat{g}_k(1, \bm{x})-\hat{g}_k(0, \bm{x})+\frac{D(Y-\hat{g}_k(1,\bm{x}))}{\hat{m}_k(\bm{x})}+\frac{(1-D)(Y-\hat{g}_k(0,\bm{x}))}{1-\hat{m}_k(\bm{x})}$	
+
+	\State compute $\hat{\theta}_k$ s.t. $\Ebs{n,k}{\psi(\bm{w}; \hat{\theta}_k, \hat{\eta}_k)}={n}^{-1}\sum_{i\in I_k}\psi_k(\bm{w}_i)=0$
+\EndFor
+
+\State $\hat{\theta}\gets {K}^{-1}\sum_{k=1}^K\hat{\theta}_k$
+\State \Return {$\hat{\theta}$}
+\end{algorithmic}
+}
+\end{algorithm}
+
+\noindent \textit{Estimation of $m_k$}. The estimate is obtained by training a lasso logit on the data $(\bm{w}_i)_{i\in I^c_k}$. I use lasso to shrink the parameters, thereby selecting the covariates that are good predictors of the treatment. As $D$ is binary, I choose the logit based loss function to ensure that the predicted propensity score is in $[0,1]$.
+Let $\bm{x}_{*}$ denote the standardised covariate vector\footnote{Note that to standardise $(\bm{x})_i)_{i\in I_k^c}$, only data in $I_k^c$ are used.}, then
+\begin{align*}
+\hat{m}_k(\bm{x}) &\ceq S(\tld{\bm{x}}'\hat{\bm{\beta}}_k) \\
+\tld{\bm{x}} &\ceq (1, \bm{x}_*')' \\
+S(z) &\ceq (1+\exp(-z))^{-1} \\
+\hat{\bm{\beta}}_k&\ceq \arg\min_{\bm{\beta}\in\real^{p+1}} -n^{-1}\sum_{i\in I^c_k}[D_i\log(S(\tld{\bm{x}}_{i}'\bm{\beta}))+(1-D_i)\log(1-S(\tld{\bm{x}}_i'\bm{\beta}))] +\lambda_k^* \norm{1}{\bm{\beta}^{(-1)}}
+\end{align*}
+for $k=1,2\ldots,K$, where $\bm{\beta}^{(-1)}$ is the coefficient vector excluding the coordinate of  $\bm{\beta}$ corresponding to the constant. $\lambda_k^*$ is the misclassification rate-optimal penalty selected by 10-fold cross-validation on $I^c_k$ from the set $\{10^j\}_{j=-1,0,\ldots,7,8}$.
+
+
+\noindent \textit{Estimation of $g_k$}. The estimate is obtained by bagging a regression tree, capturing  potentially complex dependencies between the outcome variable $Y$ and $(D, \bm{x}')'$. Bagging reduces variance by resampling the data and aggregating the predictions across the samples.
+Formally,
+\begin{align*}
+\h{g}_k(D,\bm{x}) &\ceq B^{-1}\sum_{b=1}^B \h{T}_k^b(D,\bm{x}) \\
+\h{T}_k^b(D,\bm{x}) &\ceq \sum_{l\in \mathcal{L}^b_k}\mathbbm{1}_{(D,\bm{x}')'\in l_k}(D, \bm{x})\sum_{i\in I_k^c: (D_i,\bm{x}_i')'\in l} \fr{Y_i}{|\{j\in I_k^c: (D_j,\bm{x}_j')'\in l\}|},\quad b=1,2\ldots,B
+\end{align*}
+for $k=1,2\ldots,K$ where $\mathbbm{1}_{.}(.)$ is the indicator function, taking on value 1 if $(D,\bm{x}')'\in l$, 0 otherwise, $\mathcal{L}^b_k$ is the set of terminal nodes in the $b$th bootstrap sample.\footnote{In each bootstrap sample, I randomly select $|I_k^c|$ observations from $I_k^c$ and fit the tree $T^b_k$ using the selected observations for the training.} That is, we take the sample average of observations in $I_k^c$ that are in the same node as $(D,\bm{x}')'$.  The regression trees are all fitted with the parameters \textit{maximum depth} set to 15, \textit{minimum number of samples in terminal nodes} set to 500. The parameters are chosen to avoid overfitting and to ensure that there is a large number of observations in the terminal nodes so that the variance of the average in the node is reduced. I set the number of bootstrap samples to $B=50$. Following the recommendation of \cite{chernozhukov2016}, $K$ is set to 5.
+
+\noindent \textit{Inference} \cite{chernozhukov2016} establish asymptotic normality of $\h{\theta}$, so that the confidence interval
+\begin{align*}
+\text{CI}_{1-\alpha}\ceq \left[\h{\theta}\mypm \Phi^{-1}(1-\alpha/2)\sqrt{\h{\sigma}^2/N}\right] \\
+\h{\sigma}^2\ceq{K}^{-1}\sum_{k=1}^K \h{\sigma}_k^2 \\
+\h{\sigma}_k^2\ceq \Ebs{n,k}{\psi(\bm{w}, \h{\theta}, \h{\eta}_k)^2}
+\end{align*}
+has a uniform coverage of $100(1-\alpha)\%$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%			RESULTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+
+\noindent Applying Algorithm \ref{alg:estim} results in the point estimates $(\h\theta_k)_{k=1}^K = ($\input{theta_hats.tex}\hspace{-1ex}$)$. Hence, the final point estimate is 
+$\h{\theta}=$ $\input{theta_hat.tex}$. Note that this is a smaller effect than what was found by simply comparing birth weight  sample averages for smoker and nonsmoker mothers ($\approx $-240 grams). However, the difference between the effect estimates is not large, which becomes even more apparent after quantifying estimation uncertainty in $\h\theta$.
+
+\noindent Estimation of the variance of $\h\theta$ results in the point estimates $(\h\sigma_k^2)_{k=1}^K = ($\input{sigmasq_hats.tex}\hspace{-1ex}$)$. The variance estimate is then $\h{\sigma^2}=$ $\input{sigmasq_hat.tex}$. Hence the 95\% confidence interval is $\input{confint.tex}$ grams. That is, at size 5\% we do not reject the two-sided hypothesis of zero, or even positive, average treatment effect. 
+
+\noindent The main limitation of the report is the validity of CIA. It may well be the case that we do not observe enough covariates for CIA to hold. Unconfoundedness would be more credible if we observed more detailed data on smoking and health status.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%			Conclusion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+
+\noindent I estimated the causal effect of the mother's smoking on her newborn baby's birth weight with machine learning methods proposed by \cite{chernozhukov2016}, using an observational data set comprising 60,000 first-time Caucasian mothers in North Carolina, USA. The point estimate of the average treatment effect is
+$\input{theta_hat.tex}$
+ grams indicating an adverse health effect for the baby. However, the point estimate has a large variance: the 95\% confidence interval for the average treatment effect is $\input{confint.tex}$ grams. Thus, in conclusion, we cannot reject the null hypothesis that maternal smoking has zero average treatment effect on the birth weight.
+
+\section{Codes}
+
+\noindent Codes are available at \href{https://github.com/kmmate/SML_assignment}{\url{https://github.com/kmmate/SML_assignment}}
+
+{\scriptsize%
+\bibliography{report}
+\bibliographystyle{plainnat}
+}
+
+
+
+
+\end{document}
